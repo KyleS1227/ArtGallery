@@ -1,0 +1,88 @@
+
+*{
+    overflow-x: hidden;
+}
+line{
+    background-color: black;
+    width: 100vw;
+    height: 3px;
+    top: 6vh;
+    position: absolute;
+    left: 0;
+}
+
+header{
+    position: absolute;
+    display: grid;
+    width: 100vw;
+    height: 5vh;
+    grid-template-rows: 1fr;
+    grid-template-columns: 4fr 1fr 1fr;
+    align-items: center;
+    text-indent: 8vw;
+    left: 0;
+
+}
+
+#name{
+    font-size: 40px;
+    color: black;
+}
+button{
+    border: 0px;
+    background-color: transparent;
+    font-size: 20px;
+}
+button:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+portfolio{
+    padding-top: 175px;
+    padding-left: 8vw;
+    padding-right: 8vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center; 
+    gap: 1vh;
+    
+}
+.portfolioImage{
+    border: 3px solid black;
+    height: 27vh;
+    width: 27vw;
+
+    object-fit: cover;
+    
+}
+.portfolioImage:last-child{
+    border: 3px solid black;
+}
+
+#addMedia{
+    cursor: pointer;
+
+
+}
+
+.icon{
+    height: 5vh;
+    width: 5vh;
+}
+
+
+
+upload{
+    position: fixed;
+    left: 25vw;
+    top: 15vh;
+    background-color: rgb(255, 255, 255);
+    border: 3px solid black;
+    height: 70vh;
+    width:50vw;
+}
+
+#uploadImage{
+    height: 100px;
+    width: 100px;
+}

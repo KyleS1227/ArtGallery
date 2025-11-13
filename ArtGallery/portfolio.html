@@ -1,0 +1,35 @@
+<!DOCTYPE html> 
+<html>  
+    <head>
+        <link rel="stylesheet" type = "text/css" href = "style.css">
+        <title>Portfolio</title>  
+    </head>
+    
+    <body>
+      <script defer src = "script.js" ></script>
+      <header>
+        <div id = "name">horse.</div>
+        <button id = 'view' onclick = 'cycleView()'>gallery view</button>
+        <button onclick = 'window.location.replace("index.html")'>home</button>
+      </header>
+      <line></line>
+      <portfolio id = "portfolio">
+        <img class = "portfolioImage" src = 'images/horse.png'>
+        <img class = "portfolioImage" src = 'images/horse.png'>
+        <img class = "portfolioImage" src = 'images/horse.png'>
+      </portfolio>
+
+
+
+      <upload id = 'uploadPop'>
+        <div id = "name">Upload Media</div>
+        <button type = "button">exit</button>
+        <line></line>
+        <img id = 'uploadImage' src = 'images/horse.png'>
+        <input type="text" id="title"placeholder="Enter title:">
+        <input type="text" id="description"placeholder="Enter description:">
+
+        <button type = "button">Upload Media</button>
+      </upload>
+    </body>
+</html>
