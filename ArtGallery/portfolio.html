@@ -1,0 +1,227 @@
+<!DOCTYPE html> 
+<html>  
+    <head>
+        <link rel="stylesheet" type = "text/css" href = "style.css">
+        <title>Portfolio</title>  
+        <style>
+          *{
+              overflow-x: hidden;
+              margin: 0;
+              padding: 0;
+              box-sizing: border-box;
+          }
+          body {
+              font-family: Arial, sans-serif;
+              background-color: white;
+          }
+          nav {
+              border-bottom: 2px solid black;
+              padding: 20px 40px;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+          }
+          .logo {
+              font-size: 20px;
+              font-weight: bold;
+          }
+          .nav-links {
+              display: flex;
+              gap: 30px;
+              list-style: none;
+          }
+          .nav-links a {
+              text-decoration: none;
+              color: black;
+              font-size: 14px;
+              padding: 8px 16px;
+              border: 2px solid transparent;
+              transition: all 0.2s;
+          }
+          .nav-links a:hover {
+              border: 2px solid black;
+          }
+
+          #name{
+              font-size: 40px;
+              color: black;
+          }
+          button{
+              border: 0px;
+              background-color: transparent;
+              font-size: 20px;
+          }
+          button:hover{
+              cursor: pointer;
+              text-decoration: underline;
+          }
+          portfolio{
+              padding-top: 175px;
+              padding-left: 8vw;
+              padding-right: 8vw;
+              display: grid;
+              grid-template-columns: 1fr 1fr 1fr;
+              justify-items: center; 
+              gap: 1vh;
+
+          }
+
+
+
+
+
+
+          .portfolioImage{
+              height: 27vh;
+              width: 27vw;
+              border-bottom: 2px solid black;
+              object-fit: contain;
+
+          }
+          .portfolio-item {
+              border: 2px solid black;
+          }
+          .portfolio-item:last-child{
+              cursor: pointer;
+          }
+          .portfolio-item:last-child:hover{
+              background-color: rgb(216, 216, 216);
+              transition: all 0.2s;
+          }
+          .item-title {
+              font-weight: bold;
+              font-size: 14px;
+              padding: 10px;
+          }
+
+
+
+          upload{
+              display: none;
+              position: fixed;
+              left: 35vw;
+              top: 15vh;
+              background-color: rgb(255, 255, 255);
+              border: 2px solid black;
+              height: 70vh;
+              width:30vw;
+          }
+          #content{
+              display: grid;
+              grid-template-columns: 1fr;
+          }
+          #uploadImage{
+              height:30vh;
+              width: 30vw;
+              justify-self: center;
+              margin: 0;
+              border-bottom: 2px solid black;
+              object-fit: contain;
+          }
+
+          uploadHeader{
+              display: grid;
+              grid-template-columns: 1fr 1fr;
+              border-bottom: 2px solid black;
+              align-items: center;
+              justify-items: center;
+          }
+          #name{
+              font-size: 18px;
+              font-weight: bold;
+              justify-self: start;
+              margin-left: 1vw;
+          }
+          #closeUpload{
+              justify-self: end;
+              margin-right: 1vw;
+          }
+          .input{
+              margin-top: 1vh;
+              margin-left: 1vw;
+              margin-right: 1vw;
+              height: 5vh;
+              font-size: 18px;
+              text-indent: 1vw;
+          
+          }
+          #description{
+              text-align: start;
+              height: 10vh;
+          }
+          .btn {
+              justify-self: center;
+              margin-top: 1vh;
+              margin-bottom: 1vh;
+              width: 150px;
+              padding: 10px 20px;
+              border: 2px solid black;
+              background-color: white;
+              cursor: pointer;
+              font-size: 14px;
+              transition: all 0.2s;
+          }
+          .btn:hover {
+              background-color: black;
+              color: white;
+          }
+
+
+        </style>
+    </head>
+    
+    <body>
+      <script defer src = "script.js" ></script>
+    <nav>
+      <div class="logo">PORTFOLIO</div>
+        <ul class="nav-links">
+          <button id = 'view' onclick = 'cycleView()'>gallery view</button>
+          <button onclick = 'window.location.replace("index.html")'>home</button>
+        </ul>
+    </nav>
+      <portfolio id = "portfolio">
+
+          <div class="portfolio-item">
+            <img class = "portfolioImage" src = 'images/horse.png'>
+            <div class="item-title">Project Title 2</div>
+          </div>
+    
+          <div class="portfolio-item">
+            <img class = "portfolioImage" src = 'images/horse.png'>
+            <div class="item-title">Project Title 2</div>
+          </div>
+
+          <div class="portfolio-item">
+            <img class = "portfolioImage" src = 'images/horse.png'>
+            <div class="item-title">Project Title 2</div>
+          </div>
+
+          <div class="portfolio-item">
+            <img class = "portfolioImage" src = 'images/horse.png'>
+            <div class="item-title">Project Title 2</div>
+          </div>
+
+          <div class="portfolio-item" onclick="togglePopup()">
+            <img class = "portfolioImage" src = 'images/plus_icon.png'>
+            <div class="item-title">Add Project</div>
+          </div>
+          
+      </portfolio>
+
+
+
+      <upload id = 'uploadPop'>
+        <uploadHeader>
+          <div id = "name">UPLOAD MEDIA</div>
+          <button id = 'closeUpload' class="btn" onclick="togglePopup()">Close</button>
+        </uploadHeader>
+          <div id = "content">
+            <img id = 'uploadImage' src = 'images/horse.png'>
+            <input type="text" class = 'input' id="title"placeholder="Enter title:">
+            <input type="text" class = 'input' id="description"placeholder="Enter alt description:">
+
+            <button class="btn" onclick='uploadMedia()'>+ Upload Media</button>
+        </div>
+      </upload>
+    </body>
+</html>
