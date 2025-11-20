@@ -117,9 +117,11 @@
               margin: 0;
               border-bottom: 2px solid black;
               object-fit: contain;
+              cursor: pointer;
           }
 
           uploadHeader{
+                
               display: grid;
               grid-template-columns: 1fr 1fr;
               border-bottom: 2px solid black;
@@ -216,7 +218,7 @@
           <button id = 'closeUpload' class="btn" onclick="togglePopup()">Close</button>
         </uploadHeader>
           <div id = "content">
-            <img id = 'uploadImage' src = 'images/Conservation.png'>
+            <img id = 'uploadImage' src = 'images/plus_icon.png' onclick = 'uploadFile()'>
             <input type="text" class = 'input' id="title"placeholder="Enter title:">
             <input type="text" class = 'input' id="description"placeholder="Enter alt description:">
 

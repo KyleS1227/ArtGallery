@@ -8,7 +8,7 @@ function uploadMedia(){
         //creates image 
         const portfolioImage = document.createElement('img');
         portfolioImage.className = "portfolioImage";
-        portfolioImage.src = "images/horse.png";
+        portfolioImage.src = "images/Conservation.png";
 
         //creates name of portfolio
         const portfolioName = document.createElement('div');
@@ -24,6 +24,11 @@ function uploadMedia(){
         addMedia.addEventListener("click", togglePopup);
         togglePopup();
     }
+}
+
+function uploadFile(){
+    imageThumbnail = document.getElementById('uploadImage');
+    imageThumbnail.src = "images/Conservation.png";
 }
 
 function togglePopup(){
