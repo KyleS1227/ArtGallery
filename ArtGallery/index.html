@@ -3,228 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - Artist Portfolio</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background-color: white;
-        }
-
-        nav {
-            border-bottom: 2px solid black;
-            padding: 20px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 20px;
-            font-weight: bold;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: black;
-            font-size: 14px;
-            padding: 8px 16px;
-            border: 2px solid transparent;
-            transition: all 0.2s;
-        }
-
-        .nav-links a:hover {
-            border: 2px solid black;
-        }
-
-        .main-content {
-            padding: 40px;
-        }
-
-        .page-header {
-            margin-bottom: 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        h1 {
-            font-size: 28px;
-            font-weight: normal;
-        }
-
-        .upload-btn {
-            padding: 10px 20px;
-            border: 2px solid black;
-            background-color: white;
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.2s;
-        }
-
-        .upload-btn:hover {
-            background-color: black;
-            color: white;
-        }
-
-        /* Gallery Grid */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 20px;
-        }
-
-        .portfolio-item {
-            border: 2px solid black;
-            aspect-ratio: 1;
-            display: flex;
-            flex-direction: column;
-            cursor: pointer;
-            transition: all 0.2s;
-            background-color: white;
-        }
-
-        .portfolio-item:hover {
-            background-color: #f5f5f5;
-        }
-
-        .item-preview {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-bottom: 2px solid black;
-            font-size: 14px;
-            color: #666;
-        }
-
-        .item-info {
-            padding: 15px;
-        }
-
-        .item-title {
-            font-weight: bold;
-            margin-bottom: 5px;
-            font-size: 14px;
-        }
-
-        .item-type {
-            font-size: 12px;
-            color: #666;
-        }
-
-        .categories {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 30px;
-            border-bottom: 2px solid black;
-            padding-bottom: 10px;
-        }
-
-        .category-tab {
-            padding: 8px 16px;
-            border: 2px solid black;
-            background-color: white;
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.2s;
-        }
-
-        .category-tab:hover,
-        .category-tab.active {
-            background-color: black;
-            color: white;
-        }
-    </style>
+    <meta name="description" content="Art Gallery - User Profile">
+    <meta name="theme-color" content="#6366f1">
+    <title>My Profile - Art Gallery</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <nav>
-        <div class="logo">PORTFOLIO</div>
-        <ul class="nav-links">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Gallery</a></li>
-            <li><a href="#">Upload</a></li>
-            <li><a href="#">Account</a></li>
-        </ul>
-    </nav>
+    <div class="container">
+        <header class="header">
+            <h1>My Profile</h1>
+        </header>
 
-    <!-- Main Content -->
-    <div class="main-content">
-        <div class="page-header">
-            <h1>My Portfolio</h1>
-            <button class="upload-btn">+ Upload Project</button>
-        </div>
-
-        <!-- Category Tabs -->
-        <div class="categories">
-            <button class="category-tab active">All</button>
-            <button class="category-tab">Photography</button>
-            <button class="category-tab">Music</button>
-            <button class="category-tab">Art</button>
-        </div>
-
-        <!-- Gallery Grid -->
-        <div class="gallery-grid">
-            <div class="portfolio-item">
-                <div class="item-preview">[Image Preview]</div>
-                <div class="item-info">
-                    <div class="item-title">Project Title 1</div>
-                    <div class="item-type">Photography</div>
+        <main class="profile-container">
+            <!-- Profile Picture Section -->
+            <div class="profile-picture-section">
+                <div class="profile-picture-wrapper">
+                    <img id="profilePicture" src="https://via.placeholder.com/150" alt="Profile Picture" class="profile-picture">
+                    <button class="edit-picture-btn" id="editPictureBtn" aria-label="Edit profile picture">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                        </svg>
+                    </button>
                 </div>
+                <input type="file" id="pictureInput" accept="image/*" style="display: none;">
             </div>
 
-            <div class="portfolio-item">
-                <div class="item-preview">[Audio Waveform]</div>
-                <div class="item-info">
-                    <div class="item-title">Project Title 2</div>
-                    <div class="item-type">Music</div>
-                </div>
+            <!-- Profile Info Section -->
+            <div class="profile-info">
+                <form id="profileForm" class="profile-form">
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" name="fullName" class="form-input" placeholder="Enter your full name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="accountName">Account Name</label>
+                        <input type="text" id="accountName" name="accountName" class="form-input" placeholder="Enter your account name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" class="form-input" placeholder="Enter your email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" class="form-input" placeholder="Enter your phone number" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="artStyle">Art Style</label>
+                        <select id="artStyle" name="artStyle" class="form-input" required>
+                            <option value="">Select your art style</option>
+                            <option value="realism">Realism</option>
+                            <option value="abstract">Abstract</option>
+                            <option value="impressionism">Impressionism</option>
+                            <option value="expressionism">Expressionism</option>
+                            <option value="surrealism">Surrealism</option>
+                            <option value="pop-art">Pop Art</option>
+                            <option value="minimalism">Minimalism</option>
+                            <option value="contemporary">Contemporary</option>
+                            <option value="digital">Digital Art</option>
+                            <option value="mixed-media">Mixed Media</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" id="editBtn" class="btn btn-primary">Edit Profile</button>
+                        <button type="submit" id="saveBtn" class="btn btn-success" style="display: none;">Save Changes</button>
+                        <button type="button" id="cancelBtn" class="btn btn-secondary" style="display: none;">Cancel</button>
+                    </div>
+                </form>
             </div>
 
-            <div class="portfolio-item">
-                <div class="item-preview">[Image Preview]</div>
-                <div class="item-info">
-                    <div class="item-title">Project Title 3</div>
-                    <div class="item-type">Art</div>
-                </div>
+            <!-- Success Message -->
+            <div id="successMessage" class="success-message" style="display: none;">
+                Profile updated successfully!
             </div>
-
-            <div class="portfolio-item">
-                <div class="item-preview">[Image Preview]</div>
-                <div class="item-info">
-                    <div class="item-title">Project Title 4</div>
-                    <div class="item-type">Photography</div>
-                </div>
-            </div>
-
-            <div class="portfolio-item">
-                <div class="item-preview">[Audio Waveform]</div>
-                <div class="item-info">
-                    <div class="item-title">Project Title 5</div>
-                    <div class="item-type">Music</div>
-                </div>
-            </div>
-
-            <div class="portfolio-item">
-                <div class="item-preview">[Image Preview]</div>
-                <div class="item-info">
-                    <div class="item-title">Project Title 6</div>
-                    <div class="item-type">Art</div>
-                </div>
-            </div>
-        </div>
+        </main>
     </div>
+
+    <script src="app.js"></script>
 </body>
 </html>
+
