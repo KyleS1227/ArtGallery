@@ -153,4 +153,335 @@
             display: block;
             margin-bottom: 8px;
             font-size: 14px;
-            font-
+            font-weight: bold;
+        }
+
+        .form-group input[type="text"],
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid black;
+            font-size: 14px;
+            font-family: Arial, sans-serif;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .upload-thumbnail-btn {
+            padding: 10px 20px;
+            border: 2px solid black;
+            background-color: white;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+            width: 100%;
+        }
+
+        .upload-thumbnail-btn:hover {
+            background-color: #f5f5f5;
+        }
+
+        .thumbnail-preview {
+            margin-top: 15px;
+            border: 2px solid black;
+            padding: 10px;
+            text-align: center;
+            display: none;
+        }
+
+        .thumbnail-preview.active {
+            display: block;
+        }
+
+        .thumbnail-preview img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+        }
+
+        .submit-project-btn {
+            padding: 12px 20px;
+            border: 2px solid black;
+            background-color: white;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .submit-project-btn:hover {
+            background-color: black;
+            color: white;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .portfolio-item {
+            border: 2px solid black;
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            transition: all 0.2s;
+            background-color: white;
+        }
+
+        .portfolio-item:hover {
+            background-color: #f5f5f5;
+        }
+
+        .item-preview {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 2px solid black;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .item-info {
+            padding: 15px;
+        }
+
+        .item-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .item-type {
+            font-size: 12px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+<nav>
+    <div class="logo">PORTFOLIO</div>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="#">Gallery</a></li>
+        <li><a href="#">Upload</a></li>
+        <li><a href="#" id="account-link">Account</a></li>
+    </ul>
+</nav>
+
+<div class="main-content">
+    <div class="page-header">
+        <h1 id="page-title">My Portfolio</h1>
+        <button class="upload-btn" id="create-project-btn">+ Create Project</button>
+    </div>
+
+    <input type="text" class="search-bar" id="search-bar" placeholder="Search projects by name...">
+
+    <div class="gallery-grid" id="gallery-grid">
+        <div class="portfolio-item">
+            <div class="item-preview">[Image Preview]</div>
+            <div class="item-info">
+                <div class="item-title">Project Title 1</div>
+                <div class="item-type">Photography</div>
+            </div>
+        </div>
+
+        <div class="portfolio-item">
+            <div class="item-preview">[Audio Waveform]</div>
+            <div class="item-info">
+                <div class="item-title">Project Title 2</div>
+                <div class="item-type">Music</div>
+            </div>
+        </div>
+
+        <div class="portfolio-item">
+            <div class="item-preview">[Image Preview]</div>
+            <div class="item-info">
+                <div class="item-title">Project Title 3</div>
+                <div class="item-type">Art</div>
+            </div>
+        </div>
+
+        <div class="portfolio-item">
+            <div class="item-preview">[Image Preview]</div>
+            <div class="item-info">
+                <div class="item-title">Project Title 4</div>
+                <div class="item-type">Photography</div>
+            </div>
+        </div>
+
+        <div class="portfolio-item">
+            <div class="item-preview">[Audio Waveform]</div>
+            <div class="item-info">
+                <div class="item-title">Project Title 5</div>
+                <div class="item-type">Music</div>
+            </div>
+        </div>
+
+        <div class="portfolio-item">
+            <div class="item-preview">[Image Preview]</div>
+            <div class="item-info">
+                <div class="item-title">Project Title 6</div>
+                <div class="item-type">Art</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="create-modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Create New Project</h2>
+            <button class="close-btn" id="close-modal">&times;</button>
+        </div>
+
+        <form id="create-project-form">
+            <div class="form-group">
+                <label for="project-name">Project Name</label>
+                <input type="text" id="project-name" name="project-name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="project-description">Project Description</label>
+                <textarea id="project-description" name="project-description" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Thumbnail</label>
+                <button type="button" class="upload-thumbnail-btn" id="upload-thumbnail-btn">Upload Thumbnail</button>
+                <div class="thumbnail-preview" id="thumbnail-preview">
+                    <p>Thumbnail Preview:</p>
+                    <img src="" alt="Thumbnail preview" id="thumbnail-img">
+                </div>
+            </div>
+
+            <button type="submit" class="submit-project-btn">Create Project</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    const projects = [];
+    const createBtn = document.getElementById('create-project-btn');
+    const modal = document.getElementById('create-modal');
+    const closeBtn = document.getElementById('close-modal');
+    const createForm = document.getElementById('create-project-form');
+    const uploadThumbnailBtn = document.getElementById('upload-thumbnail-btn');
+    const thumbnailPreview = document.getElementById('thumbnail-preview');
+    const thumbnailImg = document.getElementById('thumbnail-img');
+    const searchBar = document.getElementById('search-bar');
+    const galleryGrid = document.getElementById('gallery-grid');
+
+    const placeholderImage = 'https://www.engineersedge.com/engine/images/car_engine_parts_diagram.png';
+
+    createBtn.addEventListener('click', () => {
+        modal.classList.add('active');
+    });
+
+    closeBtn.addEventListener('click', () => {
+        modal.classList.remove('active');
+        createForm.reset();
+        thumbnailPreview.classList.remove('active');
+    });
+
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.classList.remove('active');
+            createForm.reset();
+            thumbnailPreview.classList.remove('active');
+        }
+    });
+
+    uploadThumbnailBtn.addEventListener('click', () => {
+        thumbnailImg.src = placeholderImage;
+        thumbnailPreview.classList.add('active');
+    });
+
+    createForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const projectName = document.getElementById('project-name').value;
+        const projectDescription = document.getElementById('project-description').value;
+
+        const newProject = {
+            id: Date.now(),
+            name: projectName,
+            description: projectDescription,
+            thumbnail: placeholderImage,
+            type: 'Art'
+        };
+
+        projects.push(newProject);
+        renderProjects(projects);
+
+        modal.classList.remove('active');
+        createForm.reset();
+        thumbnailPreview.classList.remove('active');
+    });
+
+    searchBar.addEventListener('input', (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+        const filteredProjects = projects.filter(project =>
+            project.name.toLowerCase().includes(searchTerm)
+        );
+        renderProjects(filteredProjects);
+    });
+
+    function renderProjects(projectsToRender) {
+        galleryGrid.innerHTML = '';
+
+        projectsToRender.forEach(project => {
+            const projectItem = document.createElement('div');
+            projectItem.className = 'portfolio-item';
+            projectItem.innerHTML = `
+                    <div class="item-preview">
+                        <img src="${project.thumbnail}" alt="${project.name}" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="item-info">
+                        <div class="item-title">${project.name}</div>
+                        <div class="item-type">${project.type}</div>
+                    </div>
+                `;
+            galleryGrid.appendChild(projectItem);
+        });
+    }
+
+    async function checkSession() {
+        try {
+            const response = await fetch('/api/session');
+            const data = await response.json();
+
+            if (data.loggedIn) {
+                document.getElementById('page-title').textContent = `${data.username}'s Portfolio`;
+
+                const accountLink = document.getElementById('account-link');
+                accountLink.textContent = 'Logout';
+                accountLink.addEventListener('click', async (e) => {
+                    e.preventDefault();
+
+                    await fetch('/api/logout', { method: 'POST' });
+                    window.location.href = 'login.html';
+                });
+            } else {
+                document.getElementById('page-title').textContent = 'Guest Portfolio';
+
+                const accountLink = document.getElementById('account-link');
+                accountLink.textContent = 'Login';
+                accountLink.href = 'login.html';
+            }
+        } catch (error) {
+            console.error('Error checking session:', error);
+        }
+    }
+
+    checkSession();
+</script>
+</body>
+</html>
