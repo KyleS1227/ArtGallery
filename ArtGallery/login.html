@@ -24,6 +24,7 @@
             width: 100%;
             max-width: 400px;
             padding: 20px;
+            
         }
 
         .login-box {
@@ -123,6 +124,45 @@
         .alternate-action a:hover {
             text-decoration: none;
         }
+         @media (prefers-color-scheme: dark) {
+            body{
+                background-color: #1a1a1a;
+                color: #eee;
+            }
+            .login-box{
+                background-color: #1a1a1a;
+            }
+            button{
+                background-color: #1a1a1a;
+                color: #eee;
+                border: 2px solid #eee;   
+            }
+            button:hover {
+                background-color: #eee;
+                color: #1a1a1a;
+            }
+            .login-box{
+             border: 2px solid #eee;   
+            }
+            .alternate-action a{
+                color: #eee;
+            }
+             .divider::before {
+                background-color: #eee;
+             }
+             .divider span {
+                color: #1a1a1a;
+             }
+            input[type="text"],
+            input[type="password"] {
+                background-color: #1a1a1a;
+                color: #eee;
+                border: 2px solid #eee;   
+
+            }
+
+        }
+
     </style>
 </head>
 <body>

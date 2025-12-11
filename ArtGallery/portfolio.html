@@ -10,6 +10,7 @@
               padding: 0;
               box-sizing: border-box;
           }
+
           body {
               font-family: Arial, sans-serif;
               background-color: white;
@@ -168,7 +169,53 @@
               color: white;
           }
 
-
+        @media (prefers-color-scheme: dark) {
+            *{
+                background-color: #1a1a1a;
+                color: #eee;
+            }
+            .portfolio-item:last-child:hover{
+                background-color: #1a1a1a;
+                transition: all 0.2s;
+            }
+            .portfolio-item {
+                border: 2px solid #eee;
+                
+            }
+            .portfolioImage{
+                border-bottom: 2px solid #eee;
+                object-fit: cover;
+                background-color: #808080;
+            }
+            nav {
+               border-bottom: 2px solid #eee;
+            }
+            .btn{
+                background-color: #1a1a1a;
+                color: #eee;
+                border: 2px solid #eee;
+            }
+            .btn:hover {
+              background-color: #eee;
+              color: #1a1a1a;;
+          }
+          upload{
+            border: 2px solid #eee;
+            background-color: #1a1a1a;
+          }
+          uploadHeader{
+                background-color: #1a1a1a;
+                color: #eee;
+                border-bottom: 2px solid #eee;
+          }
+          #name{
+            color: #eee;
+          }
+            #uploadImage{
+              border-bottom: 2px solid #eee;
+          }
+          
+        }
         </style>
     </head>
     
