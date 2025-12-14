@@ -1,4 +1,10 @@
+function darkModeImage(){
+    document.getElementById("logo").src = "images/Conservation.png"
+    if(window.matchMedia('(prefers-color-scheme: dark)')){
 
+    }
+    
+}
 function uploadMedia(){
     if(document.getElementById('title').value != ""){
         //creates portfolio item container
