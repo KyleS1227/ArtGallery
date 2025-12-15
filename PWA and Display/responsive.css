@@ -1,0 +1,131 @@
+/* responsive styles */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+h1, h2, h3, h4, h5, h6, p, span, div, a, li {
+  word-wrap: break-word;
+}
+
+table {
+  width: 100%;
+  overflow-x: auto;
+}
+
+iframe, video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* desktop */
+@media screen and (min-width: 1024px) {
+  .mobile-only {
+    display: none !important;
+  }
+  .tablet-only {
+    display: none !important;
+  }
+}
+
+/* tablet - 768px to 1023px (810x1080) */
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  body {
+    font-size: 16px;
+  }
+  
+  h1 {
+    font-size: 2rem;
+  }
+  
+  h2 {
+    font-size: 1.75rem;
+  }
+  
+  h3 {
+    font-size: 1.5rem;
+  }
+  
+  nav ul {
+    flex-wrap: wrap;
+  }
+}
+
+/* phone - up to 767px (375x667) */
+@media screen and (max-width: 767px) {
+  body {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  
+  h1 {
+    font-size: 1.75rem;
+    margin: 0.5em 0;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+    margin: 0.5em 0;
+  }
+  
+  h3 {
+    font-size: 1.25rem;
+    margin: 0.5em 0;
+  }
+  
+  nav ul {
+    flex-direction: column;
+    padding: 0;
+  }
+  
+  nav li {
+    width: 100%;
+  }
+  
+  nav a {
+    display: block;
+    padding: 10px;
+  }
+  
+  button, .btn {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 12px 20px;
+    font-size: 16px;
+  }
+  
+  input, textarea, select {
+    width: 100%;
+    font-size: 16px;
+    padding: 10px;
+  }
+  
+  table {
+    display: block;
+    overflow-x: auto;
+  }
+}
+
+/* small phones */
+@media screen and (max-width: 374px) {
+  body {
+    font-size: 13px;
+  }
+  
+  h1 {
+    font-size: 1.5rem;
+  }
+}
+
