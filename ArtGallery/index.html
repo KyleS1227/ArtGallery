@@ -1,134 +1,392 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portfolio</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Artist Portfolio</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; background-color: white; }
+    nav {
+      border-bottom: 2px solid black;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo { font-size: 20px; font-weight: bold; }
+    .nav-links { display: flex; gap: 30px; list-style: none; }
+    .nav-links a {
+      text-decoration: none;
+      color: black;
+      font-size: 14px;
+      padding: 8px 16px;
+      border: 2px solid transparent;
+      transition: all 0.2s;
+    }
+    .nav-links a:hover { border: 2px solid black; }
 
-<style>
-/* --- SAME STYLES YOU HAD --- */
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Arial;background:#fff}
-nav{border-bottom:2px solid black;padding:20px 40px;display:flex;justify-content:space-between}
-.nav-links{display:flex;gap:20px;list-style:none}
-.nav-links a{color:black;text-decoration:none}
-.main-content{padding:40px}
-.gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:20px}
-.portfolio-item{border:2px solid black;cursor:pointer}
-.item-preview{height:180px;border-bottom:2px solid black}
-.item-preview img{width:100%;height:100%;object-fit:cover}
-.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);justify-content:center;align-items:center}
-.modal.active{display:flex}
-.modal-content{background:white;border:2px solid black;padding:20px;width:400px}
-@media (prefers-color-scheme: dark){
- body{background:#111;color:#eee}
- nav{border-bottom:2px solid #eee}
- .portfolio-item{border:2px solid #eee}
-}
-</style>
+    .main-content { padding: 40px; max-width: 1200px; margin: 0 auto; }
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+    .page-header h1 { font-size: 28px; font-weight: normal; }
+    .upload-btn {
+      padding: 12px 20px;
+      border: 2px solid black;
+      background-color: white;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+    .upload-btn:hover { background-color: black; color: white; }
+
+    .search-bar {
+      width: 100%;
+      max-width: 500px;
+      padding: 10px 15px;
+      border: 2px solid black;
+      font-size: 14px;
+      margin-bottom: 30px;
+    }
+    .search-bar:focus { outline: none; border-color: #333; }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .portfolio-item {
+      border: 2px solid black;
+      cursor: pointer;
+      transition: transform 0.15s;
+      background: white;
+    }
+    .portfolio-item:hover { transform: translateY(-2px); }
+    .item-preview { width: 100%; height: 160px; border-bottom: 2px solid black; overflow: hidden; }
+    .item-preview img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .item-info { padding: 10px; }
+    .item-title { font-weight: bold; font-size: 14px; }
+    .item-type { font-size: 12px; opacity: 0.8; margin-top: 4px; }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+    .modal.active { display: flex; }
+    .modal-content {
+      background-color: white;
+      border: 2px solid black;
+      padding: 40px;
+      width: 90%;
+      max-width: 500px;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+    .modal-header h2 { font-size: 24px; font-weight: normal; }
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      padding: 0;
+      width: 30px;
+      height: 30px;
+    }
+    .close-btn:hover { background-color: #f5f5f5; }
+
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; margin-bottom: 8px; font-size: 14px; font-weight: bold; }
+    .form-group input[type="text"], .form-group textarea {
+      width: 100%;
+      padding: 10px;
+      border: 2px solid black;
+      font-size: 14px;
+      font-family: Arial, sans-serif;
+    }
+    .form-group textarea { min-height: 100px; resize: vertical; }
+
+    .upload-thumbnail-btn {
+      padding: 10px 20px;
+      border: 2px solid black;
+      background-color: white;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.2s;
+      width: 100%;
+    }
+    .upload-thumbnail-btn:hover { background-color: #f5f5f5; }
+
+    .thumbnail-preview {
+      margin-top: 15px;
+      border: 2px solid black;
+      padding: 10px;
+      text-align: center;
+      display: none;
+    }
+    .thumbnail-preview.active { display: block; }
+    .thumbnail-preview img { max-width: 100%; height: auto; margin-top: 10px; }
+
+    .submit-project-btn {
+      padding: 12px 20px;
+      border: 2px solid black;
+      background-color: white;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.2s;
+      width: 100%;
+      margin-top: 20px;
+    }
+    .submit-project-btn:hover { background-color: black; color: white; }
+
+    .hint { font-size: 12px; opacity: 0.75; margin-top: 8px; }
+
+    @media (prefers-color-scheme: dark) {
+      * { background-color: #1a1a1a; color: #eee; }
+      nav { border-bottom: 2px solid #eee; }
+      .nav-links a:hover { border: 2px solid #eee; }
+      .upload-btn { background-color: #1a1a1a; color: #eee; border: 2px solid #eee; }
+      .upload-btn:hover { background-color: #eee; color: #1a1a1a; }
+      .search-bar { background-color: #1a1a1a; color: #eee; border: 2px solid #eee; }
+      .portfolio-item { border: 2px solid #eee; background-color: #1a1a1a; }
+      .item-preview { border-bottom: 2px solid #eee; }
+      .modal-content { background-color: #1a1a1a; border: 2px solid #eee; }
+      .form-group input[type="text"], .form-group textarea { background-color: #1a1a1a; border: 2px solid #eee; color: #eee; }
+      .upload-thumbnail-btn { background-color: #1a1a1a; border: 2px solid #eee; color: #eee; }
+      .upload-thumbnail-btn:hover { background-color: #eee; color: #1a1a1a; }
+      .thumbnail-preview { border: 2px solid #eee; }
+      .submit-project-btn { background-color: #1a1a1a; border: 2px solid #eee; color: #eee; }
+      .submit-project-btn:hover { background-color: #eee; color: #1a1a1a; }
+    }
+  </style>
+  <link rel="icon" href="images/iconSmall.png" type="image/png">
 </head>
 
 <body>
-<nav>
-  <div>PORTFOLIO</div>
-  <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="login.html" id="account-link">Login</a></li>
-  </ul>
-</nav>
+  <nav>
+    <div class="logo">PORTFOLIO</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="#" id="account-link">Logout</a></li>
+    </ul>
+  </nav>
 
-<div class="main-content">
-  <button id="openModal">+ Create Project</button>
-  <div class="gallery-grid" id="gallery"></div>
-</div>
+  <div class="main-content">
+    <div class="page-header">
+      <h1 id="page-title">My Portfolio</h1>
+      <button class="upload-btn" id="create-project-btn">+ Create Project</button>
+    </div>
 
-<!-- MODAL -->
-<div class="modal" id="modal">
-  <div class="modal-content">
-    <h3>Create Project</h3><br>
+    <input type="text" class="search-bar" id="search-bar" placeholder="Search projects by name...">
 
-    <input id="name" placeholder="Project name"><br><br>
-    <textarea id="desc" placeholder="Description"></textarea><br><br>
-
-    <button id="pickThumb">Upload Thumbnail</button>
-    <input type="file" id="thumbFile" accept="image/*" hidden><br><br>
-    <img id="thumbPreview" style="width:100%;display:none">
-
-    <br><br>
-    <button id="create">Create</button>
+    <div class="gallery-grid" id="gallery-grid"></div>
   </div>
-</div>
 
-<script>
-const projects = [];
-
-const modal = document.getElementById("modal");
-const gallery = document.getElementById("gallery");
-
-document.getElementById("openModal").onclick = () => modal.classList.add("active");
-modal.onclick = e => e.target === modal && modal.classList.remove("active");
-
-let thumbnailData = "";
-
-document.getElementById("pickThumb").onclick = () =>
-  document.getElementById("thumbFile").click();
-
-document.getElementById("thumbFile").onchange = e => {
-  const file = e.target.files[0];
-  if (!file) return;
-
-  const reader = new FileReader();
-  reader.onload = ev => {
-    thumbnailData = ev.target.result;
-    const img = document.getElementById("thumbPreview");
-    img.src = thumbnailData;
-    img.style.display = "block";
-  };
-  reader.readAsDataURL(file);
-};
-
-document.getElementById("create").onclick = () => {
-  const name = document.getElementById("name").value;
-  const desc = document.getElementById("desc").value;
-
-  projects.push({ name, desc, thumbnail: thumbnailData });
-  render();
-
-  thumbnailData = "";
-  document.getElementById("thumbPreview").style.display = "none";
-  modal.classList.remove("active");
-};
-
-function render(){
-  gallery.innerHTML = "";
-  projects.forEach(p=>{
-    const div = document.createElement("div");
-    div.className = "portfolio-item";
-    div.innerHTML = `
-      <div class="item-preview">
-        <img src="${p.thumbnail}">
+  <div class="modal" id="create-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Create New Project</h2>
+        <button class="close-btn" id="close-modal">&times;</button>
       </div>
-      <div style="padding:10px">
-        <b>${p.name}</b><br>
-        <small>${p.desc}</small>
-      </div>`;
-    gallery.appendChild(div);
-  });
-}
 
-// SESSION CHECK (unchanged logic)
-fetch("/api/session").then(r=>r.json()).then(d=>{
-  if(d.loggedIn){
-    const link=document.getElementById("account-link");
-    link.textContent="Logout";
-    link.onclick=async e=>{
+      <form id="create-project-form">
+        <div class="form-group">
+          <label for="project-name">Project Name</label>
+          <input type="text" id="project-name" name="project-name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="project-description">Project Description</label>
+          <textarea id="project-description" name="project-description" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Thumbnail</label>
+          <button type="button" class="upload-thumbnail-btn" id="upload-thumbnail-btn">Upload Thumbnail</button>
+          <div class="hint">Pick a real image file. No placeholder.</div>
+          <input type="file" id="thumbnail-file" accept="image/*" style="display:none;">
+          <div class="thumbnail-preview" id="thumbnail-preview">
+            <p>Thumbnail Preview:</p>
+            <img src="" alt="Thumbnail preview" id="thumbnail-img">
+          </div>
+        </div>
+
+        <button type="submit" class="submit-project-btn">Create Project</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // --- refresh clears everything (projects + media) ---
+    (function clearOnRefresh() {
+      const nav = performance.getEntriesByType('navigation')[0];
+      if (nav && nav.type === 'reload') {
+        sessionStorage.removeItem('projects');
+        // remove per-project media keys too
+        Object.keys(sessionStorage).forEach(k => {
+          if (k.startsWith('projectMedia_')) sessionStorage.removeItem(k);
+        });
+      }
+    })();
+
+    // --- auth guard ---
+    const currentUser = localStorage.getItem('currentUser');
+    if (!currentUser) window.location.replace('login.html');
+
+    document.getElementById('page-title').textContent = `${currentUser}'s Portfolio`;
+
+    const accountLink = document.getElementById('account-link');
+    accountLink.addEventListener('click', (e) => {
       e.preventDefault();
-      await fetch("/api/logout",{method:"POST"});
-      location.href="login.html";
+      localStorage.removeItem('currentUser');
+      window.location.replace('login.html');
+    });
+
+    // --- storage helpers ---
+    function getProjects() {
+      try { return JSON.parse(sessionStorage.getItem('projects') || '[]'); }
+      catch { return []; }
     }
-  }
-});
-</script>
+    function setProjects(projects) {
+      sessionStorage.setItem('projects', JSON.stringify(projects));
+    }
+
+    // --- UI refs ---
+    const projects = getProjects();
+    const createBtn = document.getElementById('create-project-btn');
+    const modal = document.getElementById('create-modal');
+    const closeBtn = document.getElementById('close-modal');
+    const createForm = document.getElementById('create-project-form');
+
+    const uploadThumbnailBtn = document.getElementById('upload-thumbnail-btn');
+    const thumbnailFileInput = document.getElementById('thumbnail-file');
+    const thumbnailPreview = document.getElementById('thumbnail-preview');
+    const thumbnailImg = document.getElementById('thumbnail-img');
+
+    const searchBar = document.getElementById('search-bar');
+    const galleryGrid = document.getElementById('gallery-grid');
+
+    let selectedThumbnailDataUrl = '';
+
+    function openModal() { modal.classList.add('active'); }
+    function closeModal() {
+      modal.classList.remove('active');
+      createForm.reset();
+      selectedThumbnailDataUrl = '';
+      thumbnailImg.src = '';
+      thumbnailPreview.classList.remove('active');
+    }
+
+    createBtn.addEventListener('click', openModal);
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+
+    uploadThumbnailBtn.addEventListener('click', () => thumbnailFileInput.click());
+
+    thumbnailFileInput.addEventListener('change', async () => {
+      const file = thumbnailFileInput.files && thumbnailFileInput.files[0];
+      if (!file) return;
+
+      if (!file.type.startsWith('image/')) {
+        alert('Please choose an image file.');
+        thumbnailFileInput.value = '';
+        return;
+      }
+
+      selectedThumbnailDataUrl = await fileToDataUrl(file);
+      thumbnailImg.src = selectedThumbnailDataUrl;
+      thumbnailPreview.classList.add('active');
+    });
+
+    createForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const projectName = document.getElementById('project-name').value.trim();
+      const projectDescription = document.getElementById('project-description').value.trim();
+
+      if (!selectedThumbnailDataUrl) {
+        alert('Please upload a thumbnail image.');
+        return;
+      }
+
+      const newProject = {
+        id: Date.now(),
+        name: projectName,
+        description: projectDescription,
+        thumbnail: selectedThumbnailDataUrl,
+        type: 'Project'
+      };
+
+      projects.push(newProject);
+      setProjects(projects);
+      renderProjects(projects);
+
+      closeModal();
+    });
+
+    searchBar.addEventListener('input', (e) => {
+      const searchTerm = e.target.value.toLowerCase();
+      const filtered = projects.filter(p => p.name.toLowerCase().includes(searchTerm));
+      renderProjects(filtered);
+    });
+
+    function renderProjects(projectsToRender) {
+      galleryGrid.innerHTML = '';
+      projectsToRender.forEach(project => {
+        const projectItem = document.createElement('div');
+        projectItem.className = 'portfolio-item';
+        projectItem.innerHTML = `
+          <div class="item-preview">
+            <img src="${project.thumbnail}" alt="${escapeHtml(project.name)}">
+          </div>
+          <div class="item-info">
+            <div class="item-title">${escapeHtml(project.name)}</div>
+            <div class="item-type">${escapeHtml(project.type)}</div>
+          </div>
+        `;
+
+        projectItem.addEventListener('click', () => {
+          // store selection + navigate
+          sessionStorage.setItem('selectedProjectId', String(project.id));
+          window.location.href = `portfolio.html?projectId=${encodeURIComponent(project.id)}`;
+        });
+
+        galleryGrid.appendChild(projectItem);
+      });
+    }
+
+    function fileToDataUrl(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function escapeHtml(str) {
+      return String(str).replace(/[&<>"']/g, (m) => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'
+      }[m]));
+    }
+
+    renderProjects(projects);
+  </script>
 </body>
 </html>
 
