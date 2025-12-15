@@ -1,261 +1,196 @@
-<!DOCTYPE html> 
-<html>  
-    <head>
-        <link rel="stylesheet" type = "text/css" href = "style.css">
-        <title>Portfolio - Art Gallery</title>  
-        <style>
-          *{
-              overflow-x: hidden;
-              margin: 0;
-              padding: 0;
-              box-sizing: border-box;
-          }
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Project - Galleria</title>
+  <link rel="icon" href="images/iconSmall.png" type="image/png">
 
-          body {
-              font-family: Arial, sans-serif;
-              background-color: white;
-          }
-          nav {
-              border-bottom: 2px solid black;
-              padding: 20px 40px;
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
-          }
-          .logo {
-              font-size: 20px;
-              font-weight: bold;
-          }
-          .nav-links {
-              display: flex;
-              gap: 30px;
-              list-style: none;
-          }
-          .nav-links a {
-              text-decoration: none;
-              color: black;
-              font-size: 14px;
-              padding: 8px 16px;
-              border: 2px solid transparent;
-              transition: all 0.2s;
-          }
-          .nav-links a:hover {
-              border: 2px solid black;
-          }
+  <style>
+    * { overflow-x: hidden; margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; background-color: white; }
 
-          #name{
-              font-size: 40px;
-              color: black;
-          }
-          button{
-              border: 0px;
-              background-color: transparent;
-              font-size: 20px;
-          }
-          button:hover{
-              cursor: pointer;
-              text-decoration: underline;
-          }
-          portfolio{
-              padding-top: 175px;
-              padding-left: 8vw;
-              padding-right: 8vw;
-              display: grid;
-              grid-template-columns: 1fr 1fr 1fr;
-              justify-items: center; 
-              gap: 1vh;
+    nav {
+      border-bottom: 2px solid black;
+      padding: 16px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
 
-          }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: black;
+    }
+    .brand img { height: 38px; width: auto; display: block; }
+    .brand span { font-weight: bold; letter-spacing: 0.5px; }
 
+    .nav-links { display: flex; gap: 14px; list-style: none; align-items: center; }
+    button {
+      border: 0;
+      background-color: transparent;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover { text-decoration: underline; }
 
+    .header { padding: 30px 40px; }
+    #projectTitle { font-size: 28px; font-weight: normal; }
+    #projectDesc { margin-top: 8px; opacity: 0.85; }
 
+    portfolio {
+      padding: 20px 8vw 60px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      justify-items: center;
+      gap: 1vh;
+    }
 
+    .portfolio-item {
+      border: 2px solid black;
+      width: 27vw;
+      min-width: 220px;
+      background: white;
+    }
 
+    .portfolioImage {
+      height: 27vh;
+      width: 100%;
+      border-bottom: 2px solid black;
+      object-fit: cover;
+      display: block;
+      background: #f2f2f2;
+    }
 
-          .portfolioImage{
-              height: 27vh;
-              width: 27vw;
-              border-bottom: 2px solid black;
-              object-fit: cover;
+    .item-title { font-weight: bold; font-size: 14px; padding: 10px; }
 
-          }
-          .portfolio-item {
-              border: 2px solid black;
-          }
-          .portfolio-item:last-child{
-              cursor: pointer;
-          }
-          .portfolio-item:last-child:hover{
-              background-color: rgb(216, 216, 216);
-              transition: all 0.2s;
-          }
-          .item-title {
-              font-weight: bold;
-              font-size: 14px;
-              padding: 10px;
-          }
+    .add-tile { cursor: pointer; }
+    .add-tile:hover { background-color: rgb(216, 216, 216); transition: all 0.2s; }
 
+    .previewWrap { padding: 10px; }
+    .previewWrap audio { width: 100%; }
 
+    upload {
+      display: none;
+      position: fixed;
+      left: 35vw;
+      top: 15vh;
+      background-color: white;
+      border: 2px solid black;
+      height: 70vh;
+      width: 30vw;
+      min-width: 320px;
+      z-index: 2000;
+    }
+    uploadHeader {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 2px solid black;
+      align-items: center;
+      justify-items: center;
+    }
+    #name { font-size: 18px; font-weight: bold; justify-self: start; margin-left: 1vw; }
+    #closeUpload { justify-self: end; margin-right: 1vw; }
 
-          upload{
-              min-width: 400px;
-              display: none;
-              position: fixed;
-              left: 50vw;
-              right: 50vw;
-              top: 15vh;
-              background-color: rgb(255, 255, 255);
-              border: 2px solid black;
-              height: 70vh;
-              width:30vw;
-          }
-          #content{
-              display: grid;
-              grid-template-columns: 1fr;
-          }
-          #uploadImage{
-              height:30vh;
-              width: 30vw;
-              justify-self: center;
-              margin: 0;
-              object-fit: contain;
-              cursor: pointer;
-          }
+    #content { display: grid; grid-template-columns: 1fr; }
 
-          uploadHeader{
-                
-              display: grid;
-              grid-template-columns: 1fr 1fr;
-              border-bottom: 2px solid black;
-              align-items: center;
-              justify-items: center;
-          }
-          #name{
-              font-size: 18px;
-              font-weight: bold;
-              justify-self: start;
-              margin-left: 1vw;
-          }
-          #closeUpload{
-              justify-self: end;
-              margin-right: 1vw;
-          }
-          .input{
-              margin-top: 1vh;
-              margin-left: 1vw;
-              margin-right: 1vw;
-              height: 5vh;
-              font-size: 18px;
-              text-indent: 1vw;
-          
-          }
-          #description{
-              text-align: start;
-              height: 10vh;
-          }
-          .btn {
-              justify-self: center;
-              margin-top: 1vh;
-              margin-bottom: 1vh;
-              width: 150px;
-              padding: 10px 20px;
-              border: 2px solid black;
-              background-color: white;
-              cursor: pointer;
-              font-size: 14px;
-              transition: all 0.2s;
-          }
-          .btn:hover {
-              background-color: black;
-              color: white;
-          }
+    #uploadPreview {
+      height: 30vh;
+      width: 100%;
+      border-bottom: 2px solid black;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      padding: 8px;
+      text-align: center;
+    }
+    #uploadPreview img { max-height: 100%; max-width: 100%; }
+    #uploadPreview audio { width: 100%; }
 
-        @media (prefers-color-scheme: dark) {
-            *{
-                background-color: #1a1a1a;
-                color: #eee;
-            }
-            .portfolio-item:last-child:hover{
-                background-color: #1a1a1a;
-                transition: all 0.2s;
-            }
-            .portfolio-item {
-                border: 2px solid #eee;
-                
-            }
-            .portfolioImage{
-                border-bottom: 2px solid #eee;
-                object-fit: cover;
-                background-color: #808080;
-            }
-            nav {
-               border-bottom: 2px solid #eee;
-            }
-            .btn{
-                background-color: #1a1a1a;
-                color: #eee;
-                border: 2px solid #eee;
-            }
-            .btn:hover {
-              background-color: #eee;
-              color: #1a1a1a;;
-          }
-          upload{
-            border: 2px solid #eee;
-            background-color: #1a1a1a;
-          }
-          uploadHeader{
-                background-color: #1a1a1a;
-                color: #eee;
-                border-bottom: 2px solid #eee;
-          }
-          #name{
-            color: #eee;
-          }
-            #uploadImage{
-              
-              background-color: #808080
-          }
+    .input {
+      margin-top: 1vh;
+      margin-left: 1vw;
+      margin-right: 1vw;
+      height: 5vh;
+      font-size: 16px;
+      text-indent: 1vw;
+      border: 2px solid black;
+    }
+    #description { height: 10vh; }
 
-        }
-        </style>
-        <link rel="icon" href="images/iconSmall.png" type="image/png">
-    </head>
-    
-    <body>
-      <script defer src = "script.js" ></script>
-    <nav>
-      <div class="logo">PORTFOLIO</div>
-        <ul class="nav-links">
-          <button id = 'view' onclick = 'cycleView()'>gallery view</button>
-          <button onclick = 'window.location.replace("index.html")'>home</button>
-        </ul>
-    </nav>
-      <portfolio id = "portfolio">
+    .btn {
+      justify-self: center;
+      margin-top: 1vh;
+      margin-bottom: 1vh;
+      width: 170px;
+      padding: 10px 20px;
+      border: 2px solid black;
+      background-color: white;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+    .btn:hover { background-color: black; color: white; }
 
-    
+    @media (prefers-color-scheme: dark) {
+      body { background-color: #1a1a1a; color: #eee; }
+      nav { border-bottom: 2px solid #eee; }
+      .brand { color: #eee; }
+      .portfolio-item { border: 2px solid #eee; background-color: #1a1a1a; }
+      .portfolioImage { border-bottom: 2px solid #eee; background-color: #808080; }
+      .add-tile:hover { background-color: #232323; }
+      upload { border: 2px solid #eee; background-color: #1a1a1a; }
+      uploadHeader { border-bottom: 2px solid #eee; }
+      #uploadPreview { border-bottom: 2px solid #eee; }
+      .input { background-color: #1a1a1a; border: 2px solid #eee; color: #eee; }
+      .btn { background-color: #1a1a1a; color: #eee; border: 2px solid #eee; }
+      .btn:hover { background-color: #eee; color: #1a1a1a; }
+    }
+  </style>
+</head>
 
-          <div class="portfolio-item" onclick="togglePopup()">
-            <img class = "portfolioImage" src = 'images/plus_icon.png'>
-            <div class="item-title">Add Project</div>
-          </div>
-          
-      </portfolio>
+<body>
+  <script defer src="script.js"></script>
 
+  <nav>
+    <a class="brand" href="index.html">
+      <img src="images/iconFull.png" alt="Galleria logo">
+      <span>Galleria</span>
+    </a>
 
+    <ul class="nav-links">
+      <button id="view" onclick="cycleView()">gallery view</button>
+      <button onclick="window.location.replace('index.html')">home</button>
+    </ul>
+  </nav>
 
-      <upload id = 'uploadPop'>
-        <uploadHeader>
-          <div id = "name">UPLOAD MEDIA</div>
-          <button id = 'closeUpload' class="btn" onclick="togglePopup()">Close</button>
-        </uploadHeader>
-          <div id = "content">
-            <img id = 'uploadImage' src = 'images/plus_icon.png' onclick = 'uploadFile()'>
-            <input type="text" class = 'input' id="title"placeholder="Enter title:">
-            <input type="text" class = 'input' id="description"placeholder="Enter alt description:">
+  <div class="header">
+    <div id="projectTitle">Project</div>
+    <div id="projectDesc"></div>
+  </div>
 
-            <button class="btn" onclick='uploadMedia()'>+ Upload Media</button>
-        </div>
-      </upload>
-    </body>
+  <portfolio id="portfolio"></portfolio>
+
+  <upload id="uploadPop">
+    <uploadHeader>
+      <div id="name">UPLOAD MEDIA</div>
+      <button id="closeUpload" class="btn" onclick="togglePopup()">Close</button>
+    </uploadHeader>
+
+    <div id="content">
+      <div id="uploadPreview" onclick="uploadFile()">
+        Click to choose an image or audio file
+      </div>
+
+      <input type="text" class="input" id="title" placeholder="Enter title:">
+      <input type="text" class="input" id="description" placeholder="Enter description:">
+
+      <button class="btn" onclick="uploadMedia()">+ Upload Media</button>
+
+      <input type="file" id="mediaFile" accept="image/*,audio/*" style="display:none;">
+    </div>
+  </upload>
+</body>
 </html>
