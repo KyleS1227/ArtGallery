@@ -9,6 +9,9 @@ body {
   padding: 0;
   width: 100%;
   overflow-x: hidden;
+  background-color: #ffffff;
+  color: #25292e;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
 }
 
 img {
@@ -20,14 +23,60 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, li {
   word-wrap: break-word;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  color: #25292e;
+}
+
+a {
+  color: #0969da;
+}
+
+a:hover {
+  color: #0860ca;
+}
+
 table {
   width: 100%;
   overflow-x: auto;
+  border-collapse: collapse;
+}
+
+table th, table td {
+  border: 1px solid #d1d9e0;
+  padding: 8px;
 }
 
 iframe, video {
   max-width: 100%;
   height: auto;
+}
+
+button, .btn {
+  background-color: #0969da;
+  color: #ffffff;
+  border: 1px solid #0969da;
+  border-radius: 6px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+button:hover, .btn:hover {
+  background-color: #0860ca;
+  border-color: #0860ca;
+}
+
+input, textarea, select {
+  border: 1px solid #d1d9e0;
+  border-radius: 6px;
+  padding: 8px;
+  background-color: #ffffff;
+  color: #25292e;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: #0969da;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(9, 105, 218, 0.1);
 }
 
 /* desktop */
@@ -97,6 +146,7 @@ iframe, video {
   nav a {
     display: block;
     padding: 10px;
+    color: #0969da;
   }
   
   button, .btn {
@@ -104,12 +154,15 @@ iframe, video {
     min-width: 44px;
     padding: 12px 20px;
     font-size: 16px;
+    background-color: #0969da;
+    color: #ffffff;
   }
   
   input, textarea, select {
     width: 100%;
     font-size: 16px;
     padding: 10px;
+    border: 1px solid #d1d9e0;
   }
   
   table {
@@ -128,4 +181,3 @@ iframe, video {
     font-size: 1.5rem;
   }
 }
-
