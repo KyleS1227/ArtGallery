@@ -1,52 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Login</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - Artist Portfolio</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .container { width: 100%; max-width: 400px; padding: 20px; }
+    .login-box { border: 2px solid black; padding: 40px 30px; background-color: white; }
+    h1 { text-align: center; margin-bottom: 30px; font-size: 24px; font-weight: normal; }
+    .input-group { margin-bottom: 20px; }
+    label { display: block; margin-bottom: 8px; font-size: 14px; }
+    input[type="text"], input[type="password"] {
+      width: 100%; padding: 10px; border: 2px solid black; font-size: 14px; background-color: white;
+    }
+    input[type="text"]:focus, input[type="password"]:focus { outline: none; border-color: #333; }
+    .button-group { display: flex; gap: 15px; margin-top: 30px; }
+    button {
+      flex: 1; padding: 12px; border: 2px solid black; background-color: white;
+      font-size: 14px; cursor: pointer; transition: all 0.2s;
+    }
+    button:hover { background-color: black; color: white; }
+    .divider { text-align: center; margin: 25px 0; position: relative; }
+    .divider::before {
+      content: ''; position: absolute; top: 50%; left: 0; right: 0;
+      height: 2px; background-color: black;
+    }
+    .divider span { background-color: white; padding: 0 15px; position: relative; z-index: 1; font-size: 14px; }
+    .alternate-action { text-align: center; margin-top: 20px; }
+    .alternate-action a { color: black; text-decoration: underline; font-size: 14px; }
+    .alternate-action a:hover { text-decoration: none; }
+    .msg { margin-top: 12px; font-size: 13px; text-align: center; }
+    .msg.ok { color: #0a7a2f; }
+    .msg.err { color: #b00020; }
 
-<style>
-body{font-family:Arial;display:flex;justify-content:center;align-items:center;height:100vh}
-.box{border:2px solid black;padding:30px;width:300px}
-input,button{width:100%;padding:10px;margin-top:10px}
-@media (prefers-color-scheme: dark){
- body{background:#111;color:#eee}
- .box{border:2px solid #eee}
- input,button{background:#111;color:#eee;border:2px solid #eee}
-}
-</style>
+    @media (prefers-color-scheme: dark) {
+      body { background-color: #1a1a1a; color: #eee; }
+      .login-box { background-color: #1a1a1a; border: 2px solid #eee; }
+      button { background-color: #1a1a1a; color: #eee; border: 2px solid #eee; }
+      button:hover { background-color: #eee; color: #1a1a1a; }
+      .alternate-action a { color: #eee; }
+      .divider::before { background-color: #eee; }
+      .divider span { color: #1a1a1a; }
+      input[type="text"], input[type="password"] { background-color: #1a1a1a; color: #eee; border: 2px solid #eee; }
+      .divider span { background-color: #eee; }
+    }
+  </style>
+  <link rel="icon" href="images/iconSmall.png" type="image/png">
 </head>
 
 <body>
-<div class="box">
-  <h2>Login</h2>
+  <div class="container">
+    <div class="login-box">
+      <h1>Portfolio Login</h1>
 
-  <input id="username" placeholder="Username">
-  <input id="password" type="password" placeholder="Password">
+      <form id="authForm">
+        <div class="input-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" autocomplete="username" required>
+        </div>
 
-  <button id="login">Login</button>
-  <button id="signup">Sign Up</button>
+        <div class="input-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" autocomplete="current-password" required>
+        </div>
 
-  <p style="text-align:center;margin-top:10px">
-    <a href="index.html">Continue as guest</a>
-  </p>
-</div>
+        <div class="button-group">
+          <button id="loginBtn" type="submit">Login</button>
+          <button id="signupBtn" type="button">Sign Up</button>
+        </div>
 
-<script>
-async function send(url){
-  const res = await fetch(url,{
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body:JSON.stringify({
-      username:username.value,
-      password:password.value
-    })
-  });
-  if(!res.ok) alert("Auth failed");
-  else location.href="index.html";
-}
+        <div id="msg" class="msg"></div>
+      </form>
 
-login.onclick = ()=>send("/api/login");
-signup.onclick = ()=>send("/api/signup");
-</script>
+      <div class="divider"><span>or</span></div>
+
+      <div class="alternate-action">
+        <a href="#" id="guestLink">Continue as Guest</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function getUsers() {
+      try { return JSON.parse(localStorage.getItem('users') || '{}'); }
+      catch { return {}; }
+    }
+    function setUsers(users) {
+      localStorage.setItem('users', JSON.stringify(users));
+    }
+    function setMessage(text, ok) {
+      const el = document.getElementById('msg');
+      el.textContent = text;
+      el.className = 'msg ' + (ok ? 'ok' : 'err');
+    }
+
+    // If already logged in, go to home
+    const existing = localStorage.getItem('currentUser');
+    if (existing) window.location.replace('index.html');
+
+    document.getElementById('authForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value;
+
+      const users = getUsers();
+      if (!users[username]) return setMessage('No account found. Click Sign Up first.', false);
+      if (users[username] !== password) return setMessage('Wrong password.', false);
+
+      localStorage.setItem('currentUser', username);
+      setMessage('Logged in. Redirecting...', true);
+      window.location.replace('index.html');
+    });
+
+    document.getElementById('signupBtn').addEventListener('click', () => {
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value;
+
+      if (!username || !password) return setMessage('Enter a username + password first.', false);
+
+      const users = getUsers();
+      if (users[username]) return setMessage('That username already exists. Try logging in.', false);
+
+      users[username] = password; // plain-text (class demo only)
+      setUsers(users);
+
+      localStorage.setItem('currentUser', username);
+      setMessage('Account created. Redirecting...', true);
+      window.location.replace('index.html');
+    });
+
+    document.getElementById('guestLink').addEventListener('click', (e) => {
+      e.preventDefault();
+      localStorage.setItem('currentUser', 'Guest');
+      window.location.replace('index.html');
+    });
+  </script>
 </body>
 </html>
