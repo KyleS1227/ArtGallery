@@ -1,201 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Artist Portfolio</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<title>Login</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        body {
-            font-family: Arial, sans-serif;
-            background-color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 400px;
-            padding: 20px;
-            
-        }
-
-        .login-box {
-            border: 2px solid black;
-            padding: 40px 30px;
-            background-color: white;
-        }
-
-        h1 {
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 24px;
-            font-weight: normal;
-        }
-
-        .input-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 14px;
-        }
-
-        input[type="text"],
-        input[type="password"] {
-            width: 100%;
-            padding: 10px;
-            border: 2px solid black;
-            font-size: 14px;
-            background-color: white;
-        }
-
-        input[type="text"]:focus,
-        input[type="password"]:focus {
-            outline: none;
-            border-color: #333;
-        }
-
-        .button-group {
-            display: flex;
-            gap: 15px;
-            margin-top: 30px;
-        }
-
-        button {
-            flex: 1;
-            padding: 12px;
-            border: 2px solid black;
-            background-color: white;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        button:hover {
-            background-color: black;
-            color: white;
-        }
-
-        .divider {
-            text-align: center;
-            margin: 25px 0;
-            position: relative;
-        }
-
-        .divider::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background-color: black;
-        }
-
-        .divider span {
-            background-color: white;
-            padding: 0 15px;
-            position: relative;
-            z-index: 1;
-            font-size: 14px;
-        }
-
-        .alternate-action {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .alternate-action a {
-            color: black;
-            text-decoration: underline;
-            font-size: 14px;
-        }
-
-        .alternate-action a:hover {
-            text-decoration: none;
-        }
-         @media (prefers-color-scheme: dark) {
-            body{
-                background-color: #1a1a1a;
-                color: #eee;
-            }
-            .login-box{
-                background-color: #1a1a1a;
-            }
-            button{
-                background-color: #1a1a1a;
-                color: #eee;
-                border: 2px solid #eee;   
-            }
-            button:hover {
-                background-color: #eee;
-                color: #1a1a1a;
-            }
-            .login-box{
-             border: 2px solid #eee;   
-            }
-            .alternate-action a{
-                color: #eee;
-            }
-             .divider::before {
-                background-color: #eee;
-             }
-             .divider span {
-                color: #1a1a1a;
-             }
-            input[type="text"],
-            input[type="password"] {
-                background-color: #1a1a1a;
-                color: #eee;
-                border: 2px solid #eee;   
-
-            }
-
-        }
-
-    </style>
-    <link rel="icon" href="images/iconSmall.png" type="image/png">
+<style>
+body {
+  font-family: Arial;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+@media (prefers-color-scheme: dark) {
+  body { background:#111; color:#eee; }
+  input, button { background:#111; color:#eee; border:2px solid #eee; }
+}
+</style>
 </head>
+
 <body>
-    <div class="container">
-        <div class="login-box">
-            <h1>Portfolio Login</h1>
-            
-            <form>
-                <div class="input-group">
-                    <label for="username">Username</label>
-                    <input type="text" id="username" name="username">
-                </div>
+<form id="form">
+  <input id="username" placeholder="Username" required>
+  <input id="password" type="password" placeholder="Password" required>
+  <button type="button" id="login">Login</button>
+  <button type="button" id="signup">Sign Up</button>
+</form>
 
-                <div class="input-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password">
-                </div>
+<script>
+async function send(path) {
+  const res = await fetch(path, {
+    method:"POST",
+    headers:{ "Content-Type":"application/json" },
+    body: JSON.stringify({
+      username: username.value,
+      password: password.value
+    })
+  });
+  if (!res.ok) alert("Auth failed");
+  else location.href = "index.html";
+}
 
-                <div class="button-group">
-                    <button type="submit">Login</button>
-                    <button type="button">Sign Up</button>
-                </div>
-            </form>
-
-            <div class="divider">
-                <span>or</span>
-            </div>
-
-            <div class="alternate-action">
-                <a href="#">Continue as Guest</a>
-            </div>
-        </div>
-    </div>
+login.onclick = () => send("/api/login");
+signup.onclick = () => send("/api/signup");
+</script>
 </body>
 </html>
