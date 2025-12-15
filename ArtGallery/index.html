@@ -92,6 +92,51 @@
             border-color: #333;
         }
 
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .portfolio-item {
+            border: 2px solid black;
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .portfolio-item:hover {
+            background-color: #f5f5f5;
+        }
+
+        .item-preview {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 2px solid black;
+            font-size: 14px;
+            color: #666;
+            overflow: hidden;
+        }
+
+        .item-info {
+            padding: 15px;
+        }
+
+        .item-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .item-type {
+            font-size: 12px;
+            color: #666;
+        }
+
         .modal {
             display: none;
             position: fixed;
@@ -112,7 +157,7 @@
         .modal-content {
             background-color: white;
             border: 2px solid black;
-            padding: 40px;
+            padding: 30px;
             width: 90%;
             max-width: 500px;
             max-height: 80vh;
@@ -123,7 +168,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         .modal-header h2 {
@@ -153,21 +198,26 @@
             display: block;
             margin-bottom: 8px;
             font-size: 14px;
-            font-weight: bold;
         }
 
-        .form-group input[type="text"],
+        .form-group input,
         .form-group textarea {
             width: 100%;
             padding: 10px;
             border: 2px solid black;
             font-size: 14px;
-            font-family: Arial, sans-serif;
+            font-family: inherit;
         }
 
         .form-group textarea {
-            min-height: 100px;
             resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #333;
         }
 
         .upload-thumbnail-btn {
@@ -177,18 +227,15 @@
             cursor: pointer;
             font-size: 14px;
             transition: all 0.2s;
-            width: 100%;
         }
 
         .upload-thumbnail-btn:hover {
-            background-color: #f5f5f5;
+            background-color: black;
+            color: white;
         }
 
         .thumbnail-preview {
             margin-top: 15px;
-            border: 2px solid black;
-            padding: 10px;
-            text-align: center;
             display: none;
         }
 
@@ -197,20 +244,21 @@
         }
 
         .thumbnail-preview img {
-            max-width: 100%;
-            height: auto;
-            margin-top: 10px;
+            width: 100%;
+            max-width: 200px;
+            height: 150px;
+            object-fit: cover;
+            border: 2px solid black;
         }
 
         .submit-project-btn {
-            padding: 12px 20px;
+            width: 100%;
+            padding: 15px;
             border: 2px solid black;
             background-color: white;
             cursor: pointer;
             font-size: 14px;
             transition: all 0.2s;
-            width: 100%;
-            margin-top: 20px;
         }
 
         .submit-project-btn:hover {
@@ -218,128 +266,75 @@
             color: white;
         }
 
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 20px;
-        }
-
-        .portfolio-item {
-            border: 2px solid black;
-            aspect-ratio: 1;
-            display: flex;
-            flex-direction: column;
-            cursor: pointer;
-            transition: all 0.2s;
-            background-color: white;
-        }
-
-        .portfolio-item:hover {
-            background-color: #f5f5f5;
-        }
-
-        .item-preview {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-bottom: 2px solid black;
-            font-size: 14px;
-            color: #666;
-        }
-
-        .item-info {
-            padding: 15px;
-        }
-
-        .item-title {
-            font-weight: bold;
-            margin-bottom: 5px;
-            font-size: 14px;
-        }
-
-        .item-type {
-            font-size: 12px;
-            color: #666;
-        }
         @media (prefers-color-scheme: dark) {
-
-            *{
+            body {
                 background-color: #1a1a1a;
                 color: #eee;
             }
-            .nav-links a {
-                color: #eee;
-            }
-            .nav-links a:hover{
-                border: 2px solid #eee;
-            }
+
             nav {
                 border-bottom: 2px solid #eee;
             }
-            .search-bar{
-                border: 2px solid #eee;
+
+            .nav-links a {
                 color: #eee;
             }
-             .portfolio-item {
-                 border: 2px solid #eee;
-             }
-             .portfolio-item:hover {
-                background-color: #ed0707;
-             }
-             .item-preview {
+
+            .nav-links a:hover {
+                border: 2px solid #eee;
+            }
+
+            .portfolio-item {
+                border: 2px solid #eee;
+            }
+
+            .item-preview {
                 border-bottom: 2px solid #eee;
-             }
-             .upload-btn{
-                background-color: #1a1a1a;
-                border: 2px solid #eee;
-             }
-                .upload-btn:hover{
-                background-color: #eee;
-                color: #1a1a1a;
-             }
-             .modal-content {
-                background-color: #1a1a1a;
-                border: 2px solid #eee;
-             }
-             form-group input[type="text"],
-            .form-group textarea {
-                background-color: #1a1a1a;
-                border: 2px solid #eee;
             }
-            
-            .upload-thumbnail-btn {
-                background-color: #1a1a1a;
-                border: 2px solid #eee;
-            }
-            .upload-thumbnail-btn:hover {
-                background-color: #eee;
-                color: #1a1a1a;
-            }
+
+            .upload-btn,
+            .upload-thumbnail-btn,
             .submit-project-btn {
                 background-color: #1a1a1a;
+                color: #eee;
                 border: 2px solid #eee;
             }
+
+            .upload-btn:hover,
+            .upload-thumbnail-btn:hover,
             .submit-project-btn:hover {
                 background-color: #eee;
                 color: #1a1a1a;
             }
-            #project-name{
+
+            .modal-content {
                 background-color: #1a1a1a;
                 border: 2px solid #eee;
-            
             }
 
+            .close-btn {
+                color: #eee;
+            }
+
+            .close-btn:hover {
+                background-color: #333;
+            }
+
+            .form-group input,
+            .form-group textarea {
+                background-color: #1a1a1a;
+                color: #eee;
+                border: 2px solid #eee;
+            }
         }
     </style>
-    <link rel="icon" href="images/iconSmall.png" type="image/png">
 </head>
+
 <body>
 <nav>
     <div class="logo">PORTFOLIO</div>
     <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
+        <li><a href="index-5.html">Home</a></li>
         <li><a href="#">Gallery</a></li>
         <li><a href="#">Upload</a></li>
         <li><a href="#" id="account-link">Account</a></li>
@@ -354,55 +349,7 @@
 
     <input type="text" class="search-bar" id="search-bar" placeholder="Search projects by name...">
 
-    <div class="gallery-grid" id="gallery-grid">
-        <div class="portfolio-item">
-            <div class="item-preview">[Image Preview]</div>
-            <div class="item-info">
-                <div class="item-title">Project Title 1</div>
-                <div class="item-type">Photography</div>
-            </div>
-        </div>
-
-        <div class="portfolio-item">
-            <div class="item-preview">[Audio Waveform]</div>
-            <div class="item-info">
-                <div class="item-title">Project Title 2</div>
-                <div class="item-type">Music</div>
-            </div>
-        </div>
-
-        <div class="portfolio-item">
-            <div class="item-preview">[Image Preview]</div>
-            <div class="item-info">
-                <div class="item-title">Project Title 3</div>
-                <div class="item-type">Art</div>
-            </div>
-        </div>
-
-        <div class="portfolio-item">
-            <div class="item-preview">[Image Preview]</div>
-            <div class="item-info">
-                <div class="item-title">Project Title 4</div>
-                <div class="item-type">Photography</div>
-            </div>
-        </div>
-
-        <div class="portfolio-item">
-            <div class="item-preview">[Audio Waveform]</div>
-            <div class="item-info">
-                <div class="item-title">Project Title 5</div>
-                <div class="item-type">Music</div>
-            </div>
-        </div>
-
-        <div class="portfolio-item">
-            <div class="item-preview">[Image Preview]</div>
-            <div class="item-info">
-                <div class="item-title">Project Title 6</div>
-                <div class="item-type">Art</div>
-            </div>
-        </div>
-    </div>
+    <div class="gallery-grid" id="gallery-grid"></div>
 </div>
 
 <div class="modal" id="create-modal">
@@ -424,8 +371,9 @@
             </div>
 
             <div class="form-group">
-                <label>Thumbnail</label>
+                <label>Project Thumbnail</label>
                 <button type="button" class="upload-thumbnail-btn" id="upload-thumbnail-btn">Upload Thumbnail</button>
+                <input type="file" id="thumbnail-file" accept="image/*" style="display:none;">
                 <div class="thumbnail-preview" id="thumbnail-preview">
                     <p>Thumbnail Preview:</p>
                     <img src="" alt="Thumbnail preview" id="thumbnail-img">
@@ -444,12 +392,13 @@
     const closeBtn = document.getElementById('close-modal');
     const createForm = document.getElementById('create-project-form');
     const uploadThumbnailBtn = document.getElementById('upload-thumbnail-btn');
+    const thumbnailFileInput = document.getElementById('thumbnail-file');
     const thumbnailPreview = document.getElementById('thumbnail-preview');
     const thumbnailImg = document.getElementById('thumbnail-img');
     const searchBar = document.getElementById('search-bar');
     const galleryGrid = document.getElementById('gallery-grid');
 
-    const placeholderImage = 'https://www.engineersedge.com/engine/images/car_engine_parts_diagram.png';
+    const placeholderImage = 'https://via.placeholder.com/600x400?text=No+Thumbnail';
 
     createBtn.addEventListener('click', () => {
         modal.classList.add('active');
@@ -458,6 +407,9 @@
     closeBtn.addEventListener('click', () => {
         modal.classList.remove('active');
         createForm.reset();
+        if (thumbnailFileInput) thumbnailFileInput.value = '';
+        selectedThumbnailDataUrl = '';
+        thumbnailImg.src = '';
         thumbnailPreview.classList.remove('active');
     });
 
@@ -465,13 +417,37 @@
         if (e.target === modal) {
             modal.classList.remove('active');
             createForm.reset();
+            if (thumbnailFileInput) thumbnailFileInput.value = '';
+            selectedThumbnailDataUrl = '';
+            thumbnailImg.src = '';
             thumbnailPreview.classList.remove('active');
         }
     });
 
+    let selectedThumbnailDataUrl = '';
+
     uploadThumbnailBtn.addEventListener('click', () => {
-        thumbnailImg.src = placeholderImage;
-        thumbnailPreview.classList.add('active');
+        if (!thumbnailFileInput) return;
+        thumbnailFileInput.click();
+    });
+
+    thumbnailFileInput.addEventListener('change', () => {
+        const file = thumbnailFileInput.files && thumbnailFileInput.files[0];
+        if (!file) return;
+
+        if (!file.type.startsWith('image/')) {
+            alert('Please choose an image file for the thumbnail.');
+            thumbnailFileInput.value = '';
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+            selectedThumbnailDataUrl = String(ev.target.result || '');
+            thumbnailImg.src = selectedThumbnailDataUrl;
+            thumbnailPreview.classList.add('active');
+        };
+        reader.readAsDataURL(file);
     });
 
     createForm.addEventListener('submit', (e) => {
@@ -484,7 +460,7 @@
             id: Date.now(),
             name: projectName,
             description: projectDescription,
-            thumbnail: placeholderImage,
+            thumbnail: selectedThumbnailDataUrl || '',
             type: 'Art'
         };
 
@@ -493,6 +469,9 @@
 
         modal.classList.remove('active');
         createForm.reset();
+        if (thumbnailFileInput) thumbnailFileInput.value = '';
+        selectedThumbnailDataUrl = '';
+        thumbnailImg.src = '';
         thumbnailPreview.classList.remove('active');
     });
 
@@ -512,7 +491,7 @@
             projectItem.className = 'portfolio-item';
             projectItem.innerHTML = `
                     <div class="item-preview">
-                        <img src="${project.thumbnail}" alt="${project.name}" style="width: 100%; height: 100%; object-fit: cover;">
+                        <img src="${project.thumbnail || placeholderImage}" alt="${project.name}" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                     <div class="item-info">
                         <div class="item-title">${project.name}</div>
@@ -527,27 +506,25 @@
         try {
             const response = await fetch('/api/session');
             const data = await response.json();
+            const pageTitle = document.getElementById('page-title');
+            const accountLink = document.getElementById('account-link');
 
             if (data.loggedIn) {
-                document.getElementById('page-title').textContent = `${data.username}'s Portfolio`;
-
-                const accountLink = document.getElementById('account-link');
+                pageTitle.textContent = `${data.username}'s Portfolio`;
                 accountLink.textContent = 'Logout';
+                accountLink.href = '#';
                 accountLink.addEventListener('click', async (e) => {
                     e.preventDefault();
-
                     await fetch('/api/logout', { method: 'POST' });
-                    window.location.href = 'login.html';
+                    window.location.href = 'login-2.html';
                 });
             } else {
-                document.getElementById('page-title').textContent = 'Guest Portfolio';
-
-                const accountLink = document.getElementById('account-link');
+                pageTitle.textContent = 'Guest Portfolio';
                 accountLink.textContent = 'Login';
-                accountLink.href = 'login.html';
+                accountLink.href = 'login-2.html';
             }
         } catch (error) {
-            console.error('Error checking session:', error);
+            console.error('Session check failed:', error);
         }
     }
 
