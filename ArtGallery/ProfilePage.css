@@ -256,3 +256,10 @@ select.form-input {
     font-size: 1.5rem;
   }
 }
+  @media (prefers-color-scheme: dark) {
+      * {
+          background-color: #1a1a1a !important;
+          color: #eee !important;
+      }
+
+}
