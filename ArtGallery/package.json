@@ -1,7 +1,7 @@
 {
   "name": "artist-portfolio",
   "version": "1.0.0",
-  "description": "Portfolio management system for artists, musicians, and photographers",
+  "description": "Portfolio demo with local projects and server-based auth",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
